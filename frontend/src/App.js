@@ -27,7 +27,7 @@ function App() {
     setLoading(true);
     setResult(null);
     try {
-      const res = await fetch("http://127.0.0.1:8000/plan", {
+      const res = await fetch("https://ai-travel-planner-pys6.onrender.com/plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ destination, days, budget, vibes }),
