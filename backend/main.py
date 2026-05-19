@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -25,6 +25,11 @@ class TripRequest(BaseModel):
     budget: str
     vibes: list[str]
 
+class ChatRequest(BaseModel):
+    message: str
+    itinerary: str
+    destination: str
+
 @app.post("/plan")
 def plan_trip(request: TripRequest):
     prompt = f"""You are an expert luxury travel planner with insider knowledge of hidden gems worldwide.
@@ -33,7 +38,7 @@ Create a detailed {request.days}-day itinerary for {request.destination}.
 Budget level: {request.budget}
 Travel vibes: {", ".join(request.vibes)}
 
-Respond ONLY with a valid JSON object in this exact format, no extra text, no markdown:
+Respond ONLY with a valid JSON object, no extra text, no markdown:
 {{
   "title": "catchy evocative trip title",
   "tagline": "one cinematic sentence about this trip",
@@ -64,13 +69,28 @@ Respond ONLY with a valid JSON object in this exact format, no extra text, no ma
         messages=[{"role": "user", "content": prompt}],
         max_tokens=4000
     )
-
     text = response.choices[0].message.content.strip()
     if "```" in text:
         text = text.split("```")[1]
         if text.startswith("json"):
             text = text[4:]
     return json.loads(text.strip())
+
+@app.post("/chat")
+def chat(request: ChatRequest):
+    prompt = f"""You are a helpful travel assistant for a trip to {request.destination}.
+The user has this itinerary: {request.itinerary}
+
+User message: {request.message}
+
+Give a helpful, concise response (2-4 sentences max). Be specific and actionable."""
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=500
+    )
+    return {"reply": response.choices[0].message.content}
 
 @app.get("/")
 def root():
