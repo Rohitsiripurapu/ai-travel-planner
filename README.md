@@ -1,4 +1,4 @@
-# WANDR AI — Intelligent Travel Planner
+# LUNARA — Intelligent Travel Planner
 
 ## Setup Instructions
 
