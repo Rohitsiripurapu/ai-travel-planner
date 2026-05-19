@@ -419,7 +419,7 @@ function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <span>hospital <strong>Thingar buchi vennela</strong></span>
+        <span>Built by <strong>Rohit Kumar Siripurapu</strong></span>
         <div className="footer-links">
           <a href="https://github.com/Rohitsiripurapu" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/in/rohit-siripurapu-931115237/" target="_blank" rel="noreferrer">LinkedIn</a>
