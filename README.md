@@ -1,4 +1,4 @@
-# LUNARA — Intelligent Travel Planner
+# Ai travel planner— Intelligent Travel Planner
 
 ## Setup Instructions
 
