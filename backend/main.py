@@ -94,4 +94,4 @@ Give a helpful, concise response (2-4 sentences max). Be specific and actionable
 
 @app.get("/")
 def root():
-    return {"message": "WANDR AI Backend Running!"}
+    return {"message": "Lunara Backend Running!"}
