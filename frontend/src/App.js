@@ -167,8 +167,8 @@ function App() {
       <div className="noise" />
       <header className="header">
         <div>
-          <div className="logo">Lunara</div>
-          <div className="tagline">AI-powered travel planning 🌙</div>
+          <div className="logo">AI Travel Planner</div>
+          <div className="tagline">AI-powered itinerary generator</div>
         </div>
         <div className="header-right">
           {result && (
